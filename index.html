@@ -32,7 +32,7 @@
   .hero{position:relative;background:linear-gradient(180deg,var(--felt2),#0e1a15);
     border:1px solid var(--line);border-radius:22px;padding:22px 18px 18px;text-align:center;overflow:hidden}
   .hero .label{color:var(--muted);font-size:12px;letter-spacing:.18em;text-transform:uppercase}
-  .pot{font-size:clamp(52px,17vw,78px);font-weight:700;line-height:1;color:var(--gold);
+  .pot{font-size:clamp(66px,23vw,108px);font-weight:700;line-height:1;color:var(--gold);
     font-variant-numeric:tabular-nums;letter-spacing:-.01em;margin:6px 0 2px;text-shadow:0 2px 24px rgba(244,193,75,.18)}
   .pot.bump{animation:bump .35s ease}
   @keyframes bump{40%{transform:scale(1.06)}100%{transform:scale(1)}}
@@ -66,17 +66,17 @@
   .ic.no{color:var(--red);border-color:#4a2726}
   .ic:active{transform:scale(.94)}
 
-  .card{background:var(--felt2);border:1px solid var(--line);border-radius:var(--radius);padding:14px}
-  .disp{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
-  .disp .val{font-size:30px;font-weight:700;font-variant-numeric:tabular-nums}
+  .card{background:var(--felt2);border:1px solid var(--line);border-radius:var(--radius);padding:10px}
+  .disp{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+  .disp .val{font-size:22px;font-weight:700;font-variant-numeric:tabular-nums}
   .disp .val.empty{color:var(--muted)}
-  .acts{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
-  .acts button{flex:1;min-width:70px;background:var(--chip);border:1px solid var(--line);color:var(--ink);
-    font:inherit;font-size:13px;padding:9px 4px;border-radius:10px;cursor:pointer}
+  .acts{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px}
+  .acts button{flex:1;min-width:64px;background:var(--chip);border:1px solid var(--line);color:var(--ink);
+    font:inherit;font-size:12px;padding:6px 4px;border-radius:9px;cursor:pointer}
   .acts button.sel{border-color:var(--gold-dim);color:var(--gold)}
-  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
   .grid button{background:var(--chip);border:1px solid var(--line);color:var(--ink);font:inherit;
-    font-size:22px;font-weight:600;padding:14px 0;border-radius:12px;cursor:pointer}
+    font-size:17px;font-weight:600;padding:7px 0;border-radius:10px;cursor:pointer}
   .grid button:active{transform:scale(.96)}
   .grid button.wide{grid-column:span 2}
   .grid button.add{background:var(--gold);color:#22180a;border-color:var(--gold);font-weight:700}
@@ -302,10 +302,11 @@ function addCandidate(act,amount){
 }
 function handleHeard(text){
   $('heard').textContent=text;
-  const act=detectAction(text),amt=extractAmount(text);
+  const act=detectAction(text);let amt=extractAmount(text);
   if(act==='skip'){apply('skip',amt);return;}
   if(!act&&amt===null)return;
   const action=act||'加算';
+  if(action==='コール'&&amt===null){amt=(S.mode==='トータル'?S.currentBet:S.lastAmt)||null;}
   if(S.auto==='全自動'){
     if(amt===null&&action!=='コール'){addCandidate(action,null);return;}
     apply(action,amt);
@@ -348,7 +349,10 @@ document.querySelector('.grid').addEventListener('click',e=>{
 
 /* ---------- new hand with blinds ---------- */
 function newHand(){
-  const start=(S.sb||0)+(S.bb||0)+(S.ante||0);
+  S.sb=parseInt($('sbIn').value,10)||0;
+  S.bb=parseInt($('bbIn').value,10)||0;
+  S.ante=parseInt($('anteIn').value,10)||0;
+  const start=S.sb+S.bb+S.ante;
   S.pot=start;S.lastAmt=S.bb||0;S.currentBet=(S.mode==='トータル')?(S.bb||0):0;S.history=[];
   if(start>0)S.history.push({act:'ブラインド',delta:start,after:start});
   $('cands').innerHTML='';render();
