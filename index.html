@@ -10,67 +10,40 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --felt:#0d1512;
-    --felt2:#122019;
-    --line:#1f3329;
-    --ink:#e8f0ea;
-    --muted:#7f9488;
-    --gold:#f4c14b;      /* the pot / money */
-    --gold-dim:#8a7332;
-    --mint:#4fd39a;      /* confirm */
-    --red:#e5605e;       /* discard / all-in */
-    --chip:#12261d;
-    --radius:16px;
+    --felt:#0d1512;--felt2:#122019;--line:#1f3329;--ink:#e8f0ea;--muted:#7f9488;
+    --gold:#f4c14b;--gold-dim:#8a7332;--mint:#4fd39a;--red:#e5605e;--chip:#12261d;--radius:16px;
   }
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
   html,body{margin:0;height:100%}
   body{
     background:radial-gradient(120% 80% at 50% -10%, #14241c 0%, var(--felt) 60%);
-    color:var(--ink);
-    font-family:"Space Grotesk", system-ui, -apple-system, sans-serif;
-    display:flex;justify-content:center;
-    padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);
+    color:var(--ink);font-family:"Space Grotesk", system-ui, -apple-system, sans-serif;
+    display:flex;justify-content:center;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);
   }
   .app{width:100%;max-width:520px;padding:14px 16px 28px;display:flex;flex-direction:column;gap:14px}
-
   header{display:flex;align-items:center;justify-content:space-between;gap:10px}
   .brand{display:flex;align-items:center;gap:9px;font-weight:600;letter-spacing:.02em}
   .brand .suit{color:var(--gold);font-size:18px;line-height:1}
   .brand small{display:block;color:var(--muted);font-size:11px;font-weight:400;letter-spacing:.08em}
-  .toggles{display:flex;gap:6px}
-  .pill{
-    border:1px solid var(--line);background:var(--felt2);color:var(--muted);
-    font:inherit;font-size:11px;padding:7px 10px;border-radius:999px;cursor:pointer;
-    display:flex;flex-direction:column;align-items:center;line-height:1.15;min-width:64px;
-  }
-  .pill b{color:var(--ink);font-size:12px;font-weight:600}
-  .pill:active{transform:scale(.97)}
+  .gear{width:44px;height:44px;border-radius:12px;border:1px solid var(--line);background:var(--felt2);
+    color:var(--ink);font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .gear:active{transform:scale(.95)}
 
-  /* HERO */
-  .hero{
-    position:relative;background:linear-gradient(180deg,var(--felt2),#0e1a15);
-    border:1px solid var(--line);border-radius:22px;padding:22px 18px 18px;
-    text-align:center;overflow:hidden;
-  }
+  .hero{position:relative;background:linear-gradient(180deg,var(--felt2),#0e1a15);
+    border:1px solid var(--line);border-radius:22px;padding:22px 18px 18px;text-align:center;overflow:hidden}
   .hero .label{color:var(--muted);font-size:12px;letter-spacing:.18em;text-transform:uppercase}
-  .pot{
-    font-size:clamp(52px,17vw,78px);font-weight:700;line-height:1;
-    color:var(--gold);font-variant-numeric:tabular-nums;letter-spacing:-.01em;
-    margin:6px 0 2px;text-shadow:0 2px 24px rgba(244,193,75,.18);
-  }
+  .pot{font-size:clamp(52px,17vw,78px);font-weight:700;line-height:1;color:var(--gold);
+    font-variant-numeric:tabular-nums;letter-spacing:-.01em;margin:6px 0 2px;text-shadow:0 2px 24px rgba(244,193,75,.18)}
   .pot.bump{animation:bump .35s ease}
   @keyframes bump{40%{transform:scale(1.06)}100%{transform:scale(1)}}
   .sub{color:var(--muted);font-size:13px;min-height:18px}
   .sub b{color:var(--mint);font-weight:600}
+  .modes{color:var(--muted);font-size:11px;letter-spacing:.03em;margin-top:6px;opacity:.85}
   .arc{position:absolute;left:0;right:0;bottom:-1px;height:2px;
-       background:linear-gradient(90deg,transparent,var(--gold-dim),transparent)}
+    background:linear-gradient(90deg,transparent,var(--gold-dim),transparent)}
 
-  /* MIC */
-  .mic{
-    display:flex;align-items:center;justify-content:center;gap:12px;
-    background:var(--felt2);border:1px solid var(--line);border-radius:var(--radius);
-    padding:16px;cursor:pointer;font:inherit;color:var(--ink);width:100%;
-  }
+  .mic{display:flex;align-items:center;justify-content:center;gap:12px;background:var(--felt2);
+    border:1px solid var(--line);border-radius:var(--radius);padding:16px;cursor:pointer;font:inherit;color:var(--ink);width:100%}
   .mic:active{transform:scale(.995)}
   .dot{width:16px;height:16px;border-radius:50%;background:var(--muted);flex:none}
   .mic.live .dot{background:var(--red);box-shadow:0 0 0 0 rgba(229,96,94,.55);animation:pulse 1.4s infinite}
@@ -78,46 +51,40 @@
   .mic .mt{font-weight:600}
   .mic .heard{color:var(--muted);font-size:12px;font-weight:400;margin-top:2px;min-height:15px}
 
-  /* candidates */
   .cands{display:flex;flex-direction:column;gap:8px}
-  .cand{
-    display:flex;align-items:center;gap:10px;background:var(--chip);
-    border:1px solid var(--line);border-radius:14px;padding:10px 12px;
-    animation:slidein .2s ease;
-  }
+  .cand{display:flex;align-items:center;gap:10px;background:var(--chip);border:1px solid var(--line);
+    border-radius:14px;padding:10px 12px;animation:slidein .2s ease}
   @keyframes slidein{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
   .cand .act{font-size:12px;color:var(--muted);min-width:56px}
   .cand .amt{font-size:22px;font-weight:700;color:var(--gold);font-variant-numeric:tabular-nums;
-             background:none;border:none;color:var(--gold);width:110px;font-family:inherit}
+    background:none;border:none;width:110px;font-family:inherit}
   .cand .amt:focus{outline:1px solid var(--gold-dim);border-radius:6px}
   .cand .grow{flex:1}
-  .ic{width:40px;height:40px;border-radius:11px;border:1px solid var(--line);
-      background:var(--felt2);color:var(--ink);font-size:18px;cursor:pointer;flex:none}
+  .ic{width:40px;height:40px;border-radius:11px;border:1px solid var(--line);background:var(--felt2);
+    color:var(--ink);font-size:18px;cursor:pointer;flex:none}
   .ic.ok{color:var(--mint);border-color:#204a38}
   .ic.no{color:var(--red);border-color:#4a2726}
   .ic:active{transform:scale(.94)}
 
-  /* keypad */
   .card{background:var(--felt2);border:1px solid var(--line);border-radius:var(--radius);padding:14px}
   .disp{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
   .disp .val{font-size:30px;font-weight:700;font-variant-numeric:tabular-nums}
   .disp .val.empty{color:var(--muted)}
   .acts{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
-  .acts button{flex:1;min-width:70px;background:var(--chip);border:1px solid var(--line);
-    color:var(--ink);font:inherit;font-size:13px;padding:9px 4px;border-radius:10px;cursor:pointer}
+  .acts button{flex:1;min-width:70px;background:var(--chip);border:1px solid var(--line);color:var(--ink);
+    font:inherit;font-size:13px;padding:9px 4px;border-radius:10px;cursor:pointer}
   .acts button.sel{border-color:var(--gold-dim);color:var(--gold)}
   .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-  .grid button{background:var(--chip);border:1px solid var(--line);color:var(--ink);
-    font:inherit;font-size:22px;font-weight:600;padding:14px 0;border-radius:12px;cursor:pointer}
+  .grid button{background:var(--chip);border:1px solid var(--line);color:var(--ink);font:inherit;
+    font-size:22px;font-weight:600;padding:14px 0;border-radius:12px;cursor:pointer}
   .grid button:active{transform:scale(.96)}
   .grid button.wide{grid-column:span 2}
   .grid button.add{background:var(--gold);color:#22180a;border-color:var(--gold);font-weight:700}
   .grid button.back{color:var(--muted)}
 
-  /* bottom controls + log */
   .row{display:flex;gap:8px}
-  .row button{flex:1;background:var(--felt2);border:1px solid var(--line);color:var(--ink);
-    font:inherit;font-size:14px;padding:12px;border-radius:12px;cursor:pointer}
+  .row button{flex:1;background:var(--felt2);border:1px solid var(--line);color:var(--ink);font:inherit;
+    font-size:14px;padding:12px;border-radius:12px;cursor:pointer}
   .row button.warn{color:var(--red);border-color:#3a2222}
   .log{display:flex;flex-direction:column;gap:5px;max-height:150px;overflow:auto}
   .log .li{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);
@@ -125,24 +92,47 @@
   .log .li b{color:var(--ink);font-variant-numeric:tabular-nums}
   .hint{color:var(--muted);font-size:11.5px;line-height:1.5;text-align:center}
   .hidden{display:none!important}
-  @media (prefers-reduced-motion:reduce){*{animation:none!important}}
+
+  /* settings sheet */
+  .scrim{position:fixed;inset:0;background:rgba(0,0,0,.55);backdrop-filter:blur(2px);
+    display:flex;align-items:flex-end;justify-content:center;opacity:0;pointer-events:none;transition:opacity .2s;z-index:50}
+  .scrim.open{opacity:1;pointer-events:auto}
+  .sheet{width:100%;max-width:520px;background:var(--felt2);border:1px solid var(--line);
+    border-radius:22px 22px 0 0;padding:18px 16px calc(20px + env(safe-area-inset-bottom));
+    transform:translateY(100%);transition:transform .24s ease;max-height:88vh;overflow:auto}
+  .scrim.open .sheet{transform:none}
+  .sheet h2{margin:2px 0 14px;font-size:16px;display:flex;align-items:center;justify-content:space-between}
+  .sheet .x{background:none;border:none;color:var(--muted);font-size:22px;cursor:pointer;line-height:1}
+  .grp{margin-bottom:18px}
+  .grp>.t{font-size:12px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
+  .seg{display:flex;gap:6px}
+  .seg button{flex:1;background:var(--chip);border:1px solid var(--line);color:var(--muted);font:inherit;
+    font-size:14px;padding:12px;border-radius:12px;cursor:pointer}
+  .seg button.sel{border-color:var(--gold-dim);color:var(--gold);background:#1a2a1f}
+  .blinds{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+  .blinds label{display:flex;flex-direction:column;gap:6px;font-size:12px;color:var(--muted)}
+  .blinds input{background:var(--chip);border:1px solid var(--line);color:var(--ink);font:inherit;
+    font-size:20px;font-weight:600;padding:12px;border-radius:12px;text-align:center;width:100%;
+    font-variant-numeric:tabular-nums}
+  .blinds input:focus{outline:1px solid var(--gold-dim)}
+  .note{font-size:12px;color:var(--muted);line-height:1.6;background:var(--chip);border:1px solid var(--line);
+    border-radius:12px;padding:10px 12px}
+  .note b{color:var(--gold)}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
 <div class="app">
   <header>
     <div class="brand"><span class="suit">&#9827;</span><div>ポット計算<small>VOICE TALLY</small></div></div>
-    <div class="toggles">
-      <button class="pill" id="modeBtn"><span>解釈</span><b id="modeLbl">加算</b></button>
-      <button class="pill" id="autoBtn"><span>認識</span><b id="autoLbl">半自動</b></button>
-      <button class="pill" id="bbBtn"><span>BB</span><b id="bbLbl">未設定</b></button>
-    </div>
+    <button class="gear" id="gear" aria-label="設定">&#9881;</button>
   </header>
 
   <section class="hero">
     <div class="label">Current Pot</div>
     <div class="pot" id="pot">0</div>
     <div class="sub" id="sub">卓の発言を拾ってポットに積み上げます</div>
+    <div class="modes" id="modes"></div>
     <div class="arc"></div>
   </section>
 
@@ -189,8 +179,44 @@
   <p class="hint" id="hint"></p>
 </div>
 
+<!-- settings sheet -->
+<div class="scrim" id="scrim">
+  <div class="sheet" id="sheet">
+    <h2>設定<button class="x" id="closeSet">&#10005;</button></h2>
+
+    <div class="grp">
+      <div class="t">ブラインド / アンティ</div>
+      <div class="blinds">
+        <label>SB<input id="sbIn" type="tel" inputmode="numeric" placeholder="0"></label>
+        <label>BB<input id="bbIn" type="tel" inputmode="numeric" placeholder="0"></label>
+        <label>アンティ<input id="anteIn" type="tel" inputmode="numeric" placeholder="0"></label>
+      </div>
+    </div>
+
+    <div class="grp">
+      <div class="note">「新しいハンド」を押すと、<b id="startNote">SB+BB+アンティ</b> からポットが始まります。BBは下部のBB換算にも使われます。</div>
+    </div>
+
+    <div class="grp">
+      <div class="t">解釈モード</div>
+      <div class="seg" data-seg="mode">
+        <button data-v="加算">加算</button>
+        <button data-v="トータル">トータル(簡易)</button>
+      </div>
+    </div>
+
+    <div class="grp">
+      <div class="t">認識モード</div>
+      <div class="seg" data-seg="auto">
+        <button data-v="半自動">半自動（候補確定）</button>
+        <button data-v="全自動">全自動（即加算）</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
-/* ---------- number parsing (Arabic + Japanese kanji) ---------- */
+/* ---------- number parsing ---------- */
 const KAN={'〇':0,'零':0,'一':1,'二':2,'三':3,'四':4,'五':5,'六':6,'七':7,'八':8,'九':9};
 const SMALL={'十':10,'百':100,'千':1000};
 const BIG={'万':10000,'億':100000000};
@@ -207,16 +233,11 @@ function parseAmount(raw){
     if(ch in BIG){section+=number;total+=(section===0?1:section)*BIG[ch];section=0;number=0;seen=true;continue;}
     return null;
   }
-  const r=total+section+number;
-  return (seen&&r>0)?r:null;
+  const r=total+section+number;return (seen&&r>0)?r:null;
 }
-/* pull the largest number-expression out of a free transcript */
 const NUMRE=/[0-9０-９〇零一二三四五六七八九十百千万億][0-9０-９〇零一二三四五六七八九十百千万億,]*/g;
-function extractAmount(text){
-  let best=null;const m=text.match(NUMRE);
-  if(m) for(const tok of m){const v=parseAmount(tok);if(v&&(best===null||v>best))best=v;}
-  return best;
-}
+function extractAmount(text){let best=null;const m=text.match(NUMRE);
+  if(m) for(const tok of m){const v=parseAmount(tok);if(v&&(best===null||v>best))best=v;}return best;}
 function detectAction(text){
   const t=text.replace(/\s/g,'');
   if(/オールイン|オール|allin|all\s*in/i.test(t))return'オールイン';
@@ -229,18 +250,19 @@ function detectAction(text){
 }
 
 /* ---------- state ---------- */
-const S={pot:0,mode:'加算',auto:'半自動',bb:null,currentBet:0,lastAmt:0,history:[]};
+const S={pot:0,mode:'加算',auto:'半自動',sb:0,bb:0,ante:0,currentBet:0,lastAmt:0,history:[]};
 const $=id=>document.getElementById(id);
 const fmt=n=>n.toLocaleString('ja-JP');
 
 function render(){
-  const potEl=$('pot');potEl.textContent=fmt(S.pot);
+  $('pot').textContent=fmt(S.pot);
   $('sub').innerHTML = S.bb ? `<b>${(S.pot/S.bb).toFixed(1)} BB</b>` : '卓の発言を拾ってポットに積み上げます';
-  $('modeLbl').textContent=S.mode;
-  $('autoLbl').textContent=S.auto;
-  $('bbLbl').textContent=S.bb?fmt(S.bb):'未設定';
+  const blindTxt=(S.sb||S.bb||S.ante)?` · SB${S.sb}/BB${S.bb}/A${S.ante}`:'';
+  $('modes').textContent=`${S.mode} · ${S.auto}${blindTxt}`;
   $('streetBtn').classList.toggle('hidden',S.mode!=='トータル');
   $('curBetLbl').textContent=S.mode==='トータル'?`現在のベット ${fmt(S.currentBet)}`:'';
+  const start=(S.sb||0)+(S.bb||0)+(S.ante||0);
+  $('startNote').textContent = start>0 ? `${fmt(S.sb)}+${fmt(S.bb)}+${fmt(S.ante)} = ${fmt(start)}` : 'SB+BB+アンティ';
   renderLog();
 }
 function bump(){const p=$('pot');p.classList.remove('bump');void p.offsetWidth;p.classList.add('bump');}
@@ -248,39 +270,25 @@ function renderLog(){
   const el=$('logEl');el.innerHTML='';
   S.history.slice(-8).reverse().forEach(h=>{
     const d=document.createElement('div');d.className='li';
-    d.innerHTML=`<span>${h.act}</span><b>+${fmt(h.delta)} → ${fmt(h.after)}</b>`;
-    el.appendChild(d);
-  });
+    d.innerHTML=`<span>${h.act}</span><b>+${fmt(h.delta)} → ${fmt(h.after)}</b>`;el.appendChild(d);});
 }
-
-/* apply an action to the pot; returns delta added */
 function apply(act,amount){
   let delta=0;
   if(act==='skip'){flash(`${amount?fmt(amount):''} は無視（チップ移動なし）`);return;}
   if(S.mode==='トータル'){
     if(act==='ベット'||act==='レイズ'||act==='オールイン'){
-      const target=amount??S.currentBet;
-      delta=Math.max(0,target-S.currentBet);
-      S.currentBet=Math.max(S.currentBet,target);
-    }else if(act==='コール'){
-      delta=amount??S.currentBet;
-      if(amount&&amount>S.currentBet)S.currentBet=amount;
-    }else{ delta=amount||0; }
-  }else{ // 加算
-    if(act==='コール'&&!amount)delta=S.lastAmt; else delta=amount||0;
-  }
+      const target=amount??S.currentBet;delta=Math.max(0,target-S.currentBet);S.currentBet=Math.max(S.currentBet,target);
+    }else if(act==='コール'){delta=amount??S.currentBet;if(amount&&amount>S.currentBet)S.currentBet=amount;}
+    else{delta=amount||0;}
+  }else{ if(act==='コール'&&!amount)delta=S.lastAmt; else delta=amount||0; }
   if(delta<=0){flash('金額が読み取れませんでした');return;}
-  S.pot+=delta;S.lastAmt=delta;
-  S.history.push({act,delta,after:S.pot});
-  bump();render();
+  S.pot+=delta;S.lastAmt=delta;S.history.push({act,delta,after:S.pot});bump();render();
 }
 let flashT;
-function flash(msg){const s=$('sub');s.textContent=msg;clearTimeout(flashT);
-  flashT=setTimeout(render,1600);}
+function flash(msg){const s=$('sub');s.textContent=msg;clearTimeout(flashT);flashT=setTimeout(render,1600);}
 
-/* ---------- candidates (半自動) ---------- */
+/* ---------- candidates ---------- */
 function addCandidate(act,amount){
-  const wrap=$('cands');
   const el=document.createElement('div');el.className='cand';
   el.innerHTML=`<span class="act">${act||'加算'}</span>
     <input class="amt" type="tel" value="${amount??''}" inputmode="numeric">
@@ -289,39 +297,35 @@ function addCandidate(act,amount){
   const input=el.querySelector('.amt');
   el.querySelector('.ok').onclick=()=>{apply(act||'加算',parseInt(input.value,10)||0);el.remove();};
   el.querySelector('.no').onclick=()=>el.remove();
-  wrap.prepend(el);
+  $('cands').prepend(el);
   if(!amount)input.focus();
 }
 function handleHeard(text){
   $('heard').textContent=text;
-  const act=detectAction(text);
-  const amt=extractAmount(text);
+  const act=detectAction(text),amt=extractAmount(text);
   if(act==='skip'){apply('skip',amt);return;}
   if(!act&&amt===null)return;
   const action=act||'加算';
   if(S.auto==='全自動'){
     if(amt===null&&action!=='コール'){addCandidate(action,null);return;}
     apply(action,amt);
-  }else{
-    addCandidate(action,amt);
-  }
+  }else{addCandidate(action,amt);}
 }
 
-/* ---------- speech recognition ---------- */
+/* ---------- speech ---------- */
 let rec=null,listening=false;
 function initRec(){
   const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
-  if(!SR){$('micText').textContent='この端末は音声非対応';$('hint').textContent=
-    'Web Speech API 非対応です。ChromeまたはEdge（PC/Android）で開いてください。手入力は使えます。';return null;}
+  if(!SR){$('micText').textContent='この端末は音声非対応';
+    $('hint').textContent='Web Speech API 非対応です。ChromeまたはEdge（PC/Android）で開いてください。手入力は使えます。';return null;}
   const r=new SR();r.lang='ja-JP';r.continuous=true;r.interimResults=false;
   r.onresult=e=>{for(let i=e.resultIndex;i<e.results.length;i++){
     if(e.results[i].isFinal)handleHeard(e.results[i][0].transcript.trim());}};
-  r.onend=()=>{if(listening)try{r.start()}catch(_){}}; // keep alive
+  r.onend=()=>{if(listening)try{r.start()}catch(_){}};
   r.onerror=ev=>{if(ev.error==='not-allowed'){flash('マイク許可が必要です');stopRec();}};
   return r;
 }
-function startRec(){rec=rec||initRec();if(!rec)return;listening=true;
-  try{rec.start()}catch(_){}
+function startRec(){rec=rec||initRec();if(!rec)return;listening=true;try{rec.start()}catch(_){}
   $('mic').classList.add('live');$('micText').textContent='聞き取り中… タップで停止';}
 function stopRec(){listening=false;if(rec)try{rec.stop()}catch(_){}
   $('mic').classList.remove('live');$('micText').textContent='タップして聞き取り開始';$('heard').textContent='';}
@@ -329,8 +333,7 @@ $('mic').onclick=()=>listening?stopRec():startRec();
 
 /* ---------- keypad ---------- */
 let entry='',selAct='加算';
-function showEntry(){const e=$('entry');e.textContent=entry?fmt(parseInt(entry,10)):'0';
-  e.classList.toggle('empty',!entry);}
+function showEntry(){const e=$('entry');e.textContent=entry?fmt(parseInt(entry,10)):'0';e.classList.toggle('empty',!entry);}
 $('acts').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
   selAct=b.dataset.act;[...$('acts').children].forEach(x=>x.classList.toggle('sel',x===b));});
 document.querySelector('.grid').addEventListener('click',e=>{
@@ -343,19 +346,39 @@ document.querySelector('.grid').addEventListener('click',e=>{
   showEntry();
 });
 
-/* ---------- controls ---------- */
+/* ---------- new hand with blinds ---------- */
+function newHand(){
+  const start=(S.sb||0)+(S.bb||0)+(S.ante||0);
+  S.pot=start;S.lastAmt=S.bb||0;S.currentBet=(S.mode==='トータル')?(S.bb||0):0;S.history=[];
+  if(start>0)S.history.push({act:'ブラインド',delta:start,after:start});
+  $('cands').innerHTML='';render();
+}
 $('undoBtn').onclick=()=>{const last=S.history.pop();if(!last)return;S.pot-=last.delta;render();};
-$('resetBtn').onclick=()=>{if(!confirm('ポットを0にして新しいハンドを始めますか？'))return;
-  S.pot=0;S.currentBet=0;S.lastAmt=0;S.history=[];$('cands').innerHTML='';render();};
+$('resetBtn').onclick=()=>{if(!confirm('新しいハンドを始めますか？'))return;newHand();};
 $('streetBtn').onclick=()=>{S.currentBet=0;flash('ストリート更新：現在のベットを0に');};
-$('modeBtn').onclick=()=>{S.mode=S.mode==='加算'?'トータル':'加算';S.currentBet=0;render();
-  flash(S.mode==='トータル'?'トータル(簡易)：レイズ額は最高額として扱います':'加算：言った額をそのまま足します');};
-$('autoBtn').onclick=()=>{S.auto=S.auto==='半自動'?'全自動':'半自動';render();
-  flash(S.auto==='全自動'?'全自動：認識したら即加算':'半自動：候補をタップで確定');};
-$('bbBtn').onclick=()=>{const v=prompt('BB（ビッグブラインド）の額を入力。空欄で解除',S.bb||'');
-  if(v===null)return;const n=parseInt(v,10);S.bb=n>0?n:null;render();};
 
-$('hint').textContent='ヒント：Chrome/Edgeでマイクを許可すると「ベット500」「レイズ千五百」等を拾います。うまく拾えない時は下のテンキーで。';
+/* ---------- settings sheet ---------- */
+function openSet(){$('scrim').classList.add('open');}
+function closeSet(){$('scrim').classList.remove('open');}
+$('gear').onclick=openSet;
+$('closeSet').onclick=closeSet;
+$('scrim').addEventListener('click',e=>{if(e.target===$('scrim'))closeSet();});
+
+function bindBlind(id,key){
+  const el=$(id);el.value=S[key]||'';
+  el.addEventListener('input',()=>{S[key]=parseInt(el.value,10)||0;render();});
+}
+bindBlind('sbIn','sb');bindBlind('bbIn','bb');bindBlind('anteIn','ante');
+
+document.querySelectorAll('.seg').forEach(seg=>{
+  const key=seg.dataset.seg;
+  const paint=()=>[...seg.children].forEach(b=>b.classList.toggle('sel',b.dataset.v===S[key]));
+  seg.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+    S[key]=b.dataset.v;if(key==='mode')S.currentBet=0;paint();render();});
+  paint();
+});
+
+$('hint').textContent='ヒント：Chrome/Edgeでマイクを許可すると「ベット500」「レイズ千五百」等を拾います。設定(⚙)でブラインドとモードを変更できます。';
 render();
 </script>
 </body>
